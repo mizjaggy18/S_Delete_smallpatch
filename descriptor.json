@@ -5,7 +5,7 @@
     "image": "mizjaggy18/s_delete_smallpatch",
     "type": "singularity"
   },
-  "command-line": "echo [CYTOMINE_HOST] [CYTOMINE_PUBLIC_KEY] [CYTOMINE_PRIVATE_KEY] [CYTOMINE_ID_PROJECT] [CYTOMINE_ID_SOFTWARE] [CYTOMINE_ID_IMAGES] [CYTOMINE_ID_ROI_TERM] [AREA_THRESHOLD] [CYTOMINE_ID_USER]",
+  "command-line": "echo [CYTOMINE_HOST] [CYTOMINE_PUBLIC_KEY] [CYTOMINE_PRIVATE_KEY] [CYTOMINE_ID_PROJECT] [CYTOMINE_ID_SOFTWARE] [CYTOMINE_ID_IMAGES] [CYTOMINE_ID_TERM] [AREA_THRESHOLD] [CYTOMINE_ID_USER]",
   "inputs": [
     {
       "id": "cytomine_host",
@@ -65,7 +65,7 @@
       "uri-sort-attribute": "created"
     },
     {
-      "id": "cytomine_id_roi_term",
+      "id": "cytomine_id_term",
       "value-key": "[@ID]",
       "command-line-flag": "--@id",
       "name": "Cytomine term ID",
