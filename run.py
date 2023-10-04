@@ -24,12 +24,12 @@ from cytomine.models import Property, Annotation, AnnotationTerm, AnnotationColl
 
 
 __author__ = "WSH Munirah W Ahmad <wshmunirah@gmail.com>"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 # Date created: 4 Oct 2023
 
 
 def run(cyto_job, parameters):
-    logging.info("----- ROI Split-poly v%s -----", __version__)
+    logging.info("----- Delete Small Patches v%s -----", __version__)
     logging.info("Entering run(cyto_job=%s, parameters=%s)", cyto_job, parameters)
 
     job = cyto_job.job
