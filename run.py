@@ -92,16 +92,13 @@ def run(cyto_job, parameters):
             print(roi_annotations)
 
             job.update(status=Job.RUNNING, progress=40, statusComment="Processing patches...")
-
+            print("----------------------------Patches Annotations------------------------------")
             for i, roi in enumerate(roi_annotations):
                 #Get Cytomine ROI coordinates for remapping to whole-slide
                 #Cytomine cartesian coordinate system, (0,0) is bottom left corner
-                print("----------------------------Patches Annotations------------------------------")
                 roi_geometry = wkt.loads(roi.location)
-                # roi_area = roi.area * (calibration_factor ** 2)
                 if roi.area < area_th:
                     print("ROI area deleted (in micron2): ", roi.area)
-                    # print("ROI area deleted (in pixel): ", roi_area)
                     roi.delete() #delete patch annotation smaller than define threshold area (area_th)
                                            
     finally:
