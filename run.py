@@ -40,11 +40,11 @@ def run(cyto_job, parameters):
 
     terms = TermCollection().fetch_with_filter("project", parameters.cytomine_id_project)    
     print(terms)
-    for term in terms:
-        print("ID: {} | Name: {}".format(
-            term.id,
-            term.name
-        )) 
+    # for term in terms:
+    #     print("ID: {} | Name: {}".format(
+    #         term.id,
+    #         term.name
+    #     )) 
     job.update(status=Job.RUNNING, progress=20, statusComment="Terms collected...")
     
     images = ImageInstanceCollection().fetch_with_filter("project", project.id)    
@@ -61,6 +61,7 @@ def run(cyto_job, parameters):
     id_user = parameters.cytomine_id_user
     id_term = parameters.cytomine_id_term
     area_th = parameters.area_threshold
+    print("Area threshold in micron2:", area_th)
     
     working_path = os.path.join("tmp", str(job.id))
     
@@ -92,15 +93,14 @@ def run(cyto_job, parameters):
             job.update(status=Job.RUNNING, progress=40, statusComment="Processing patches...")
 
             for i, roi in enumerate(roi_annotations):
-              #Get Cytomine ROI coordinates for remapping to whole-slide
-              #Cytomine cartesian coordinate system, (0,0) is bottom left corner                
-              print("----------------------------Patches Annotations------------------------------")
-              roi_geometry = wkt.loads(roi.location)
-              roi_area = roi.area * (calibration_factor ** 2) 
-              if roi_area < area_th:
-                roi.delete() #delete patch annotation smaller than define threshold area (area_th)
-
-                            
+                #Get Cytomine ROI coordinates for remapping to whole-slide
+                #Cytomine cartesian coordinate system, (0,0) is bottom left corner
+                print("----------------------------Patches Annotations------------------------------")
+                roi_geometry = wkt.loads(roi.location)
+                roi_area = roi.area * (calibration_factor ** 2)
+                if roi_area < area_th:
+                    print("ROI area deleted: ", roi_area)
+                    roi.delete() #delete patch annotation smaller than define threshold area (area_th)
                                            
     finally:
         job.update(progress=100, statusComment="Run complete.")
