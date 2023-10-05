@@ -75,7 +75,8 @@ def run(cyto_job, parameters):
             imageinfo.fetch()
             calibration_factor=imageinfo.resolution
             print('Parameters (id_project, id_image, id_term):',id_project, id_image, id_term)
-
+            print("Calibration factor: ",calibration_factor)
+            
             roi_annotations = AnnotationCollection()
             roi_annotations.project = id_project
             roi_annotations.image = id_image
@@ -97,9 +98,10 @@ def run(cyto_job, parameters):
                 #Cytomine cartesian coordinate system, (0,0) is bottom left corner
                 print("----------------------------Patches Annotations------------------------------")
                 roi_geometry = wkt.loads(roi.location)
-                roi_area = roi.area * (calibration_factor ** 2)
-                if roi_area < area_th:
-                    print("ROI area deleted: ", roi_area)
+                # roi_area = roi.area * (calibration_factor ** 2)
+                if roi.area < area_th:
+                    print("ROI area deleted (in micron2): ", roi.area)
+                    # print("ROI area deleted (in pixel): ", roi_area)
                     roi.delete() #delete patch annotation smaller than define threshold area (area_th)
                                            
     finally:
