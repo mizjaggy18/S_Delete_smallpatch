@@ -20,7 +20,7 @@ from glob import glob
 
 import cytomine
 from cytomine import Cytomine, CytomineJob
-from cytomine.models import Property, Annotation, AnnotationTerm, AnnotationCollection, Job, JobData, TermCollection, ImageInstanceCollection
+from cytomine.models import Property, Annotation, AnnotationTerm, AnnotationCollection, Job, JobData, TermCollection, ImageInstanceCollection, ImageInstance
 
 
 __author__ = "WSH Munirah W Ahmad <wshmunirah@gmail.com>"
